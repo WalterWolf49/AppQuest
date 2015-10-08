@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="apk" name="Groessenmesser">
+    <output-path>$PROJECT_DIR$/out/artifacts/Groessenmesser</output-path>
+    <properties id="android-properties">
+      <options>
+        <option name="keyAlias" value="imstrapezekey" />
+        <option name="keyPassword" value="VG9tYXRlblNhdWMz" />
+        <option name="keyStorePassword" value="VG9tYXRlblNhdWMz" />
+        <option name="keyStoreUrl" value="file://D:/Documents/key/imsTrapzeKey.jks" />
+        <option name="proGuardCfgFiles">
+          <list>
+            <option value="file://%MODULE_SDK_HOME%/tools/proguard/proguard-android.txt" />
+          </list>
+        </option>
+        <option name="signingMode" value="RELEASE_SIGNED" />
+      </options>
+    </properties>
+    <root id="archive" name="Groessenmesser.apk">
+      <element id="android-final-package" facet="Groessenmesser/android/Android" />
+    </root>
+  </artifact>
+</component>

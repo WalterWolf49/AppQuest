@@ -233,7 +233,7 @@ public class MainActivity extends Activity {
 					startActivityForResult(intent, SCAN_QR_CODE_REQUEST_CODE);
 					return false;
 				} else {
-					Toast.makeText(getApplicationContext(), "Please enter a mHeight!", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Please enter a height!", Toast.LENGTH_LONG).show();
 					return true;
 				}
 			}
@@ -244,30 +244,18 @@ public class MainActivity extends Activity {
 
 
 	private void log(String qrCode) {
-		Intent intent = new Intent("ch.appquest.intent.LOG");
 
-		if (getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
+		Intent intent = new Intent("ch.appquest.intent.LOG");
+		if (getPackageManager().queryIntentActivities(intent, 0x10000).isEmpty()) {
 			Toast.makeText(this, "Logbook App not Installed", Toast.LENGTH_LONG).show();
 			return;
+		} else {
+			intent.putExtra("ch.appquest.logmessage", (new StringBuilder()).append("{  \"task\": \"Groessenmesser\"," +
+					"  \"object\": \"").append(qrCode).append("\",").append("\"height\": \"")
+					.append(mHeight).append("\"").append("}").toString());
+			startActivity(intent);
+			return;
 		}
-		// Achtung, je nach App wird etwas anderes eingetragen
-		JSONObject jsonObject = new JSONObject();
-		try {
-			jsonObject.put("task", "Groessenmesser");
-			jsonObject.put("object", qrCode);
-			jsonObject.put("mHeight", mHeight);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		String logMessage = null;
-		try {
-			logMessage = jsonObject.toString(5);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		intent.putExtra("ch.appquest.logmessage", logMessage);
-
-		startActivity(intent);
 	}
 }
 
